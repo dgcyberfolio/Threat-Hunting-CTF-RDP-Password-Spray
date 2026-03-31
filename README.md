@@ -1,8 +1,8 @@
-# 🖳 Hide Your RDP: Password Spray Leads to Full Compromise (CTF)
+# Hide Your RDP: Password Spray Leads to Full Compromise (CTF)
 
 <hr style="height: 4px; background-color: grey; border: none; margin-top: 40px;">
 
-## 📏 Perimeters
+## Perimeters
 Date Completed: ***2025-09-20***  
 Simulated Environment: `LOG(N) Pacific - Cyber Range`  
 Infacted Host VM DeviceName contains `flare`  
@@ -12,12 +12,12 @@ Frameworks Applied: ***MITRE ATT&CK***, ***NIST 800-61***
 
 <hr style="height: 4px; background-color: grey; border: none; margin-top: 40px;">
 
-## 📄 Overview
+## Overview
 A password spray against an internet-exposed RDP endpoint led to a successful logon from a public IP. Post-authentication, the intruder executed a masqueraded binary, established persistence via a **Scheduled Task**, weakened **Microsoft Defender** by adding a folder exclusion, ran host discovery, locally archived data, and communicated with external infrastructure before attempting exfiltration over HTTP to a nonstandard port.
 
 <hr style="height: 4px; background-color: grey; border: none; margin-top: 40px;">
 
-## 💠 Diamond Model Analysis
+## Diamond Model Analysis
 
 | Feature | Details |
 |---|---|
@@ -28,7 +28,7 @@ A password spray against an internet-exposed RDP endpoint led to a successful lo
 
 <hr style="height: 4px; background-color: grey; border: none; margin-top: 40px;">
 
-## 🥋 MITRE ATT&CK Table
+## MITRE ATT&CK Table
 
 | Stage | Flag | Tactic | Technique ID | Technique |
 |---|---|---|---|---|
@@ -45,7 +45,7 @@ A password spray against an internet-exposed RDP endpoint led to a successful lo
 
 <hr style="height: 4px; background-color: grey; border: none; margin-top: 40px;">
 
-## ⛨ Remediation Actions
+## Remediation Actions
 1. **RDP Exposure & Auth**
    - Restrict RDP to VPN/Privileged Access Workstation; apply just-in-time access.
    - Enforce MFA; tighten lockout thresholds; audit failed logons for spray patterns.
@@ -64,7 +64,7 @@ A password spray against an internet-exposed RDP endpoint led to a successful lo
 
 <hr style="height: 4px; background-color: grey; border: none; margin-top: 40px;">
 
-## ✍️ Lessons Learned
+## Lessons Learned
 - Internet-exposed RDP without MFA remains a high-risk vector for password spraying.
 - Masqueraded binaries and public directories effectively blend with legitimate activity—naming controls and AMSI/EDR telemetry are essential.
 - Defender exclusions create durable blind spots; monitor and gate all changes to AV policies.
@@ -72,15 +72,15 @@ A password spray against an internet-exposed RDP endpoint led to a successful lo
 
 <hr style="height: 4px; background-color: grey; border: none; margin-top: 40px;">
 
-## 🏔️ Conclusion
+## Conclusion
 The investigation reconstructs a complete intrusion chain: password spray → valid RDP logon → execution and policy bypass → scheduled task persistence → Defender evasion → discovery → staging to archive → C2 contact → exfiltration attempt. The derived IOCs and behaviors support immediate containment, eradication of persistence, and follow-on detection engineering to reduce time-to-detect for similar tradecraft.
 
 <hr style="height: 4px; background-color: grey; border: none; margin-top: 40px;">
 <hr style="height: 4px; background-color: grey; border: none; margin-top: 40px;">
 
-# 🎯 Capture The Flags
+# Capture The Flags
 
-## 🕙 Timeline of Events
+## Timeline of Events
 
 | **Timestamp (UTC)**          | **Event**                                   | **Target Device**      | **Details**                              |
 |------------------------------|---------------------------------------------|------------------------|-------------------------------------------|
@@ -98,7 +98,7 @@ The investigation reconstructs a complete intrusion chain: password spray → va
 
 <hr style="height: 4px; background-color: grey; border: none; margin-top: 40px;">
 
-## 🚩 Completed Flag Map
+## Completed Flag Map
 
 | Flag   | Objective                                   | Value                                           |
 |--------|---------------------------------------------|--------------------------------------------------|
@@ -115,7 +115,7 @@ The investigation reconstructs a complete intrusion chain: password spray → va
 
 
 
-### 🏁 Stage 1: Initial Access — *The Threat Actor is trying to get into your network.*
+### Stage 1: Initial Access — *The Threat Actor is trying to get into your network.*
 
 ### Flag 1: Attacker IP Address
 **Objective:** Identify the earliest external IP that successfully logged in via RDP after multiple failures.  
@@ -359,7 +359,7 @@ DeviceProcessEvents
 
 <hr style="height: 4px; background-color: grey; border: none; margin-top: 40px;">
 
-## 🔎 Analyst Workflow
+## Analyst Workflow
 ### From an investigative standpoint, the workflow progressed as follows: ###
 
 **Authentication Review** – Investigated failed logons. Confirmed brute force attempts followed by a successful RDP login from an external IP.
